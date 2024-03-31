@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import ListenHome from './listenHome'; // New Import
 
 const Login = (props) => {
   const [email, setEmail] = useState('')
@@ -74,20 +75,32 @@ const Login = (props) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ email, password }), // Only send email and password
     })
-      .then((r) => r.json())
-      .then((r) => {
-        if ('success' === r.message) {
-          localStorage.setItem('user', JSON.stringify({ email, token: r.token }))
-          props.setLoggedIn(true)
-          props.setEmail(email)
-          navigate('/')
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Check if the response contains a token
+        if (data && data.token) {
+          const { email, user_id, user_type, username } = data.token;
+          localStorage.setItem('user', JSON.stringify({ email, user_id, user_type, username }));
+          props.setLoggedIn(true);
+          props.setEmail(email);
+          navigate('/listenHome', { state: { email, user_id, user_type, username } });
         } else {
-          window.alert('Wrong email or password ☹️')
+          window.alert('Wrong email or password ☹️');
         }
       })
+      .catch((error) => {
+        console.error('Error logging in:', error);
+        window.alert('An error occurred while logging in. Please try again.');
+      });
   }
+
 
 
 
