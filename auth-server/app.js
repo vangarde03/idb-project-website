@@ -64,25 +64,20 @@ app.post('/auth', async (req, res) => {
     return res.status(401).json({ error: 'User not found' });
   }
 
-  const isValidPassword = (password == user.password);
+  const isValidPassword = await bcrypt.compare(password, user.password);
 
   if (!isValidPassword) {
     return res.status(401).json({ error: 'Invalid password' });
   }
-  console.log(user);
 
-  // const token = jwt.sign({ message: "success", email: user.email, user_id: user.user_id, user_type: user.user_type, username: user.username }, jwtSecretKey);
-  token = { email: user.email, user_id: user.user_id, user_type: user.user_type, username: user.username }
+  const token = jwt.sign({ userId: user.id }, jwtSecretKey);
   res.json({ token });
-
 });
 
-//security vulnerability above
 
 
 
-
-app.post('/verify', (req, res) => { //this may not work
+app.post('/verify', (req, res) => {
   const tokenHeaderKey = 'jwt-token'
   const authToken = req.headers[tokenHeaderKey]
   try {
