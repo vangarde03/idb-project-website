@@ -1,4 +1,5 @@
 {
+  "proxy": "http://localhost:3000",
   "name": "react-idb-project",
   "version": "0.1.0",
   "private": true,
@@ -12,6 +13,7 @@
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
     "lowdb": "^7.0.1",
+    "pg": "^8.11.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
@@ -19,7 +21,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm-run-all --parallel start:frontend start:backend",
+    "start:frontend": "react-scripts start",
+    "start:backend": "nodemon auth-server/app.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -41,5 +45,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22",
+    "npm-run-all": "^4.1.5"
   }
 }
