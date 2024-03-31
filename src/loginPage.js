@@ -78,18 +78,28 @@ const Login = (props) => {
     })
       .then((r) => r.json())
       .then((r) => {
-        if ('success' === r.message) {
-          localStorage.setItem('user', JSON.stringify({ email, token: r.token }))
-          props.setLoggedIn(true)
-          props.setEmail(email)
-          navigate('/')
+        if (r) {
+          const { user_id, user_type, username, token } = r.token;
+          localStorage.setItem('user', JSON.stringify({ email, user_id, user_type, username, token }));
+          props.setLoggedIn(true);
+          props.setEmail(email);
+          navigate('/listenHome', {
+            state: {
+              email: email,
+              user_id: user_id,
+              user_type: user_type,
+              username: username
+            }
+          }); // Pass user data to the ListenHome component
         } else {
-          window.alert('Wrong email or password ☹️')
+          window.alert('Wrong email or password ☹️');
         }
       })
-  }
-
-
+      .catch((error) => {
+        console.error('Error logging in:', error);
+        window.alert('An error occurred while logging in. Please try again.');
+      });
+  };
 
 
 
