@@ -79,7 +79,7 @@ const Login = (props) => {
       .then((r) => r.json())
       .then((r) => {
         if (r) {
-          const { user_id, user_type, username, token } = r.token;
+          const { user_id, user_type, username, alphaNumID, token } = r.token;
           localStorage.setItem('user', JSON.stringify({ email, user_id, user_type, username, token }));
           props.setLoggedIn(true);
           props.setEmail(email);
@@ -88,7 +88,8 @@ const Login = (props) => {
               email: email,
               user_id: user_id,
               user_type: user_type,
-              username: username
+              username: username,
+              alphaNumID: alphaNumID,
             }
           }); // Pass user data to the ListenHome component
         } else {

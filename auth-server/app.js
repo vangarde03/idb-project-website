@@ -30,6 +30,7 @@ app.get('/', (_req, res) => {
 
 const { Pool } = require('pg');
 
+
 // Create a pool of database connections
 const pool = new Pool({
   // user: process.env.DB_USERNAME,
@@ -55,6 +56,24 @@ const getUserByEmail = async (email) => {
 
 };
 
+const getUserID = async (user_id) => {
+  try {
+    // Assuming you're using some database library or ORM to query the database
+    // Replace this part with your actual database querying code
+    const { rows } = await pool.query(`SELECT id FROM useris WHERE user_id = '${user_id}'`);
+
+    // Assuming the query result is an array with one object containing the id
+    // Extract the id from the query result
+    const id = rows[0];
+
+    return id;
+  } catch (error) {
+    console.error('Error getting ID:', error);
+    return null; // or handle the error appropriately
+  }
+};
+
+
 // Example authentication endpoint
 app.post('/auth', async (req, res) => {
   const { email, password } = req.body;
@@ -72,7 +91,22 @@ app.post('/auth', async (req, res) => {
   console.log(user);
 
   // const token = jwt.sign({ message: "success", email: user.email, user_id: user.user_id, user_type: user.user_type, username: user.username }, jwtSecretKey);
-  token = { email: user.email, user_id: user.user_id, user_type: user.user_type, username: user.username }
+  let token = {
+    email: user.email,
+    user_id: user.user_id,
+    user_type: user.user_type,
+    username: user.username
+  };
+
+  const id = await getUserID(user.user_id);
+  if (id) {
+    token.alphaNumID = id.id;
+  } else {
+    console.error('Failed to retrieve user ID.');
+    // Handle the error appropriately
+  }
+
+
   res.json({ token });
 
 });
@@ -125,4 +159,3 @@ app.post('/check-account', async (req, res) => {
 app.listen(3000, () => {
   console.log('Server is running on port 3000');
 });
-
