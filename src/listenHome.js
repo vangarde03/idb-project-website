@@ -9,17 +9,23 @@ const ListenHome = () => {
   console.log(state.alphaNumID);
 
   const [playlists, setPlaylists] = useState([]);
+  const [followerListeners, setFollowerListeners] = useState([]);
+  const [followerArtists, setFollowerArtists] = useState([]);
+
+  const [followedListeners, setFollowedListeners] = useState([]);
+  const [followedArtists, setFollowedArtists] = useState([]);
+
 
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        const query = `SELECT title, number_of_likes, playlist_id FROM playlist WHERE listener_id = '${state.alphaNumID}';`; // Modify the query to select only title and number_of_likes
+        const query = `SELECT title, number_of_likes, playlist_id FROM playlist WHERE listener_id = '${state.alphaNumID}';`;
         const response = await fetch('http://127.0.0.1:5000/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({ query }) // Send the query in the request body
+          body: JSON.stringify({ query })
         });
         const data = await response.json();
         setPlaylists(data);
@@ -28,14 +34,83 @@ const ListenHome = () => {
       }
     };
 
-    fetchPlaylists();
-  }, []);
-  console.log(playlists);
+    const fetchFollowerListeners = async () => {
+      try {
+        const query = `SELECT followerlistener FROM followsbetweenlisteners WHERE followeelistener = '${state.alphaNumID}';`;
+        const response = await fetch('http://127.0.0.1:5000/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query })
+        });
+        const data = await response.json();
+        setFollowerListeners(data);
+      } catch (error) {
+        console.error('Error fetching follower listeners:', error);
+      }
+    };
 
-  // const handleBack = () => {
-  //   // Navigate back to the previous page with the same state
-  //   history.goBack();
-  // };
+    const fetchFollowerArtists = async () => {
+      try {
+        const query = `SELECT followerartist FROM artistfollowslistener WHERE followeelistener = '${state.alphaNumID}';`;
+        const response = await fetch('http://127.0.0.1:5000/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query })
+        });
+        const data = await response.json();
+        setFollowerArtists(data);
+      } catch (error) {
+        console.error('Error fetching follower artists:', error);
+      }
+    };
+
+    const fetchFollowedListeners = async () => {
+      try {
+        const query = `SELECT followerlistener FROM followsbetweenlisteners WHERE followeelistener = '${state.alphaNumID}';`;
+        const response = await fetch('http://127.0.0.1:5000/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query })
+        });
+        const data = await response.json();
+        setFollowedListeners(data);
+      } catch (error) {
+        console.error('Error fetching followed listeners:', error);
+      }
+    };
+
+    const fetchFollowedArtists = async () => {
+      try {
+        const query = `SELECT followeeartist FROM listenerfollowsartist WHERE followerlistener = '${state.alphaNumID}';`;
+        const response = await fetch('http://127.0.0.1:5000/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query })
+        });
+        const data = await response.json();
+        setFollowedArtists(data);
+      } catch (error) {
+        console.error('Error fetching followed artists:', error);
+      }
+    };
+
+
+
+    fetchPlaylists();
+    fetchFollowerListeners();
+    fetchFollowerArtists();
+    fetchFollowedListeners();
+    fetchFollowedArtists();
+  }, []);
+
 
   return (
     <div>
@@ -86,18 +161,67 @@ const ListenHome = () => {
           <p>To be added soon...</p>
         </div>
       </div>
+
       <div>
         <h2>Who You Follow</h2>
-        <div className="song-recs">
-          {/* Display user's podcasts */}
-          <p>Must be added...</p>
+        <div>
+          <h3>Followed Listeners:</h3>
+          {followedListeners.length > 0 ? (
+            <ul>
+              {followedListeners.map((listener, index) => (
+                <li key={index}>
+                  Followed Listener ID: {listener[0]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No followed listeners found</p>
+          )}
+        </div>
+        <div>
+          <h3>Followed Artists:</h3>
+          {followedArtists.length > 0 ? (
+            <ul>
+              {followedArtists.map((artist, index) => (
+                <li key={index}>
+                  Followed Artist ID: {artist[0]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No followed artists found</p>
+          )}
         </div>
       </div>
       <div>
         <h2>Your Followers</h2>
-        <div className="song-recs">
-          {/* Display user's podcasts */}
-          <p>Must be added...</p>
+        <div className="follower-list">
+          <h3>Follower Listeners:</h3>
+          {followerListeners.length > 0 ? (
+            <ul>
+              {followerListeners.map((follower, index) => (
+                <li key={index}>
+                  Follower Listener ID: {follower[0]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No follower listeners found</p>
+          )}
+        </div>
+        <div className="follower-list">
+          <h3>Follower Artists:</h3>
+          {followerArtists.length > 0 ? (
+            <ul>
+              {followerArtists.map((follower, index) => (
+                <li key={index}>
+                  Follower Artist ID: {follower[0]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No follower artists found</p>
+          )}
         </div>
       </div>
       <div>

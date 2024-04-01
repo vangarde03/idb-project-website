@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from db_server import execute_query
 
+
 app = Flask(__name__)
 # Allow requests from all origins to the /query endpoint
 # CORS(app, resources={r"/query": {"origins": "*"}})
