@@ -8,6 +8,7 @@ import ArtistHome from './artistHome';
 import Podcast from './podcast';
 import Album from './album';
 import CreatePlaylist from './createPlaylist';
+import CreatePodcast from './createPodcast';
 
 import './App.css'
 import { useEffect, useState } from 'react'
@@ -30,6 +31,11 @@ function App() {
           <Route path="/ArtistHome" element={<ArtistHome email={email} loggedIn={loggedIn} />} />
           <Route path="/podcast/:podcastId" element={<Podcast />} />
           <Route path="/album/:albumId" element={<Album />} />
+
+          <Route path="/createPodcast/:artistId" element={<CreatePodcast />} />
+
+          {/* <Route path="/createAlbum/:artistId" element={<CreateAlbum />} /> */}
+
 
 
           <Route path="/adminHome" element={<AdminPage />} />

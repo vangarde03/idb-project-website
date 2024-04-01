@@ -99,10 +99,10 @@ const ArtistHome = () => {
         </div>
       </div>
       <button>
-        <Link to="/create-album">Create Album</Link>
+        <Link to="/createAlbum">Create Album</Link>
       </button>
       <button>
-        <Link to="/create-podcast">Create Podcast</Link>
+        <Link to={`/createPodcast/${state.alphaNumID}`}>Create Podcast</Link>
       </button>
       <div>
         <Link to="/search">
