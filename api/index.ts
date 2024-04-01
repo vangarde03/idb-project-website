@@ -100,3 +100,5 @@ export const checkAccountHandler = async (req, res) => {
       .json({ error: "Internal server error", caughtError: error.message });
   }
 };
+
+module.exports = app;
