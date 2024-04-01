@@ -22,9 +22,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 
-app.get('/', (_req, res) => {
-  res.send('Auth API.\nPlease use POST /auth & POST /verify for authentication')
-})
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 
 
@@ -156,6 +154,9 @@ app.post('/check-account', async (req, res) => {
 
 
 // Start the Express server
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
+const PORT = process.env.PORT || 3000; // Use the port provided by the environment or default to 3000
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
+
+module.exports = app;

@@ -55,13 +55,15 @@ const Login = (props) => {
   }
   //
   const checkAccountExists = (callback) => {
-    fetch('https://idb-project-website.vercel.app/auth-server/check-account', {
+    // In loginPage.js
+    fetch('/check-account', { // Assuming your React app and Express server are running on the same domain
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email }),
     })
+
       .then((r) => r.json())
       .then((r) => {
         callback(r?.userExists)
@@ -69,7 +71,7 @@ const Login = (props) => {
   }
 
   const logIn = () => {
-    fetch('https://idb-project-website.vercel.app/auth-server/auth', {
+    fetch('/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
