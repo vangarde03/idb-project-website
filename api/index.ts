@@ -2,17 +2,11 @@
 
 require("dotenv").config();
 const express = require("express");
-const bcrypt = require("bcrypt");
-var cors = require("cors");
-const jwt = require("jsonwebtoken");
 const { Pool } = require("pg");
 
 const app = express();
-app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
 const pool = new Pool({
   connectionString: process.env.DATABASEURI,
@@ -82,24 +76,16 @@ export const authHandler = async (req, res) => {
 };
 
 export const verifyHandler = (req, res) => {
-  const tokenHeaderKey = "jwt-token";
-  const authToken = req.headers[tokenHeaderKey];
-  try {
-    const verified = jwt.verify(authToken, jwtSecretKey);
-    if (verified) {
-      return res.status(200).json({ status: "logged in", message: "success" });
-    } else {
-      return res.status(401).json({ status: "invalid auth", message: "error" });
-    }
-  } catch (error) {
-    return res.status(401).json({ status: "invalid auth", message: "error" });
-  }
+  res.status(501).json({ error: "Not implemented" });
 };
 
 export const checkAccountHandler = async (req, res) => {
-  console.log("hi");
-
   const { email } = req.body;
+
+  const user = await getUserByEmail(email);
+  const userExists = !!user;
+
+  console.log(user);
 
   try {
     const user = await getUserByEmail(email);
