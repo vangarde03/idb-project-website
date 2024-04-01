@@ -122,8 +122,8 @@ const Login = (props) => {
         }
       })
       .catch((error) => {
-        console.error('Error logging in:', error);
-        window.alert('An error occurred while logging in. Please try again.');
+        // console.error('Error logging in:', error);
+        window.alert('You have entered an invalid password');
       });
   };
 
