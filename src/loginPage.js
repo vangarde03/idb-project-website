@@ -78,48 +78,47 @@ const Login = (props) => {
       },
       body: JSON.stringify({ email, password }),
     })
-      .then((r) => r.json())
       .then((r) => {
-        if (r) {
-          const { user_id, user_type, username, alphaNumID, token } = r.token;
-          localStorage.setItem('user', JSON.stringify({ email, user_id, user_type, username, token }));
-          props.setLoggedIn(true);
-          props.setEmail(email);
-          if (user_type == "listener") {
-            navigate('/listenHome', {
-              state: {
-                email: email,
-                user_id: user_id,
-                user_type: user_type,
-                username: username,
-                alphaNumID: alphaNumID,
-              }
-            }); // Pass user data to the ListenHome component
-          } else if (user_type == "artist") {
-            navigate('/artistHome', {
-              state: {
-                email: email,
-                user_id: user_id,
-                user_type: user_type,
-                username: username,
-                alphaNumID: alphaNumID,
-              }
-            });
-          }
-          else {
-            navigate('/adminHome', {
-              state: {
-                email: email,
-                user_id: user_id,
-                user_type: user_type,
-                username: username,
-                alphaNumID: alphaNumID,
-              }
-            });
-
-          }
+        if (r.status === 401) {
+          return r.json().then(data => Promise.reject(data.error));
+        }
+        return r.json();
+      })
+      .then((data) => {
+        const { user_id, user_type, username, alphaNumID, token } = data.token;
+        localStorage.setItem('user', JSON.stringify({ email, user_id, user_type, username, token }));
+        props.setLoggedIn(true);
+        props.setEmail(email);
+        if (user_type === "listener") {
+          navigate('/listenHome', {
+            state: {
+              email: email,
+              user_id: user_id,
+              user_type: user_type,
+              username: username,
+              alphaNumID: alphaNumID,
+            }
+          });
+        } else if (user_type === "artist") {
+          navigate('/artistHome', {
+            state: {
+              email: email,
+              user_id: user_id,
+              user_type: user_type,
+              username: username,
+              alphaNumID: alphaNumID,
+            }
+          });
         } else {
-          window.alert('Wrong email or password ☹️');
+          navigate('/adminHome', {
+            state: {
+              email: email,
+              user_id: user_id,
+              user_type: user_type,
+              username: username,
+              alphaNumID: alphaNumID,
+            }
+          });
         }
       })
       .catch((error) => {
@@ -127,6 +126,7 @@ const Login = (props) => {
         window.alert('An error occurred while logging in. Please try again.');
       });
   };
+
 
 
 

@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const { Pool } = require("pg");
 
-process.env.DATABASEURI;
+process.env.DATABASEURI; //to get vercel to work
 
 const app = express();
 app.use(express.json());
