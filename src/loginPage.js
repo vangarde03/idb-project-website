@@ -55,7 +55,7 @@ const Login = (props) => {
   }
   //
   const checkAccountExists = (callback) => {
-    fetch('http://localhost:3000/check-account', {
+    fetch('https://idb-project-website.vercel.app/check-account', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const Login = (props) => {
   }
 
   const logIn = () => {
-    fetch('http://localhost:3000/auth', {
+    fetch('http://https://idb-project-website.vercel.app/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
