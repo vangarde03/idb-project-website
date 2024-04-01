@@ -134,6 +134,7 @@ app.post('/verify', (req, res) => { //this may not work
 
 // An endpoint to see if there's an existing account for a given email address
 app.post('/check-account', async (req, res) => {
+  console.log("hi");
 
   const { email } = req.body;
 
