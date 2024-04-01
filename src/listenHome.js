@@ -13,7 +13,7 @@ const ListenHome = () => {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        const query = `SELECT title, number_of_likes FROM playlist WHERE listener_id = '${state.alphaNumID}';`; // Modify the query to select only title and number_of_likes
+        const query = `SELECT title, number_of_likes, playlist_id FROM playlist WHERE listener_id = '${state.alphaNumID}';`; // Modify the query to select only title and number_of_likes
         const response = await fetch('http://127.0.0.1:5000/query', {
           method: 'POST',
           headers: {
@@ -32,19 +32,32 @@ const ListenHome = () => {
   }, []);
   console.log(playlists);
 
+  // const handleBack = () => {
+  //   // Navigate back to the previous page with the same state
+  //   history.goBack();
+  // };
+
   return (
     <div>
       <h1>Hello, {username}!</h1>
       <div>
-        <Link to="/playlist">
-          <h2>My Playlists</h2>
-        </Link>
+        {/* <Link to="/playlist"> */}
+        <h2>My Playlists</h2>
+        {/* </Link> */}
         <div className="playlist-box">
           {playlists.length > 0 ? (
             <ul>
               {playlists.map((playlist, index) => (
                 <li key={index}>
-                  {playlist[0]} - Likes: {playlist[1]}
+                  <Link
+                    to={{
+                      pathname: `/playlist/${playlist[2]}`,
+                      state: state,  // Pass the state object here
+                    }}
+                  >
+                    {playlist[0]}
+                  </Link> - Likes: {playlist[1]}
+
                 </li>
               ))}
             </ul>
@@ -72,6 +85,20 @@ const ListenHome = () => {
         </div>
       </div>
       <div>
+        <h2>Who You Follow</h2>
+        <div className="song-recs">
+          {/* Display user's podcasts */}
+          <p>Must be added...</p>
+        </div>
+      </div>
+      <div>
+        <h2>Your Followers</h2>
+        <div className="song-recs">
+          {/* Display user's podcasts */}
+          <p>Must be added...</p>
+        </div>
+      </div>
+      <div>
         <h2>Recommended Songs</h2>
         <div className="song-recs">
           {/* Display user's podcasts */}
@@ -85,6 +112,9 @@ const ListenHome = () => {
           <p>To be added soon...</p>
         </div>
       </div>
+      <button>
+        <Link to="/create-playlist">Create Playlist</Link>
+      </button>
       <div>
         <Link to="/search">
           <button>Search</button>
