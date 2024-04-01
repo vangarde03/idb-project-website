@@ -53,8 +53,9 @@ const ArtistHome = () => {
     fetchPodcasts();
   }, []);
 
-  console.log(albums);
+  // console.log(albums);
   // console.log(podcasts);
+
 
   return (
     <div>
@@ -99,7 +100,7 @@ const ArtistHome = () => {
         </div>
       </div>
       <button>
-        <Link to="/createAlbum">Create Album</Link>
+        <Link to={`/createAlbum/${state.alphaNumID}`}>Create Album</Link>
       </button>
       <button>
         <Link to={`/createPodcast/${state.alphaNumID}`}>Create Podcast</Link>

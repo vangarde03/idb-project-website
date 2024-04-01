@@ -65,11 +65,19 @@ const Album = () => {
 
   // Format release date
   const formatDate = (numericDate) => {
-    const dateString = numericDate.toString();
+    const dateString = formatReleaseDate2(numericDate.toString());
     const day = dateString.substr(0, 2);
     const month = dateString.substr(2, 2);
     const year = dateString.substr(4, 4);
     return `${day}/${month}/${year}`;
+  };
+
+  const formatReleaseDate2 = (dateString) => {
+    if (dateString.length < 8) {
+      // Add leading zero if date string length is less than 8
+      return '0' + dateString;
+    }
+    return dateString;
   };
 
 

@@ -9,6 +9,8 @@ import Podcast from './podcast';
 import Album from './album';
 import CreatePlaylist from './createPlaylist';
 import CreatePodcast from './createPodcast';
+import CreateAlbum from './createAlbum';
+
 
 import './App.css'
 import { useEffect, useState } from 'react'
@@ -33,8 +35,7 @@ function App() {
           <Route path="/album/:albumId" element={<Album />} />
 
           <Route path="/createPodcast/:artistId" element={<CreatePodcast />} />
-
-          {/* <Route path="/createAlbum/:artistId" element={<CreateAlbum />} /> */}
+          <Route path="/createAlbum/:artistId" element={<CreateAlbum />} />
 
 
 
