@@ -95,6 +95,8 @@ export const checkAccountHandler = async (req, res) => {
     });
   } catch (error) {
     console.error("Error checking account:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res
+      .status(500)
+      .json({ error: "Internal server error", caughtError: error.message });
   }
 };
