@@ -55,7 +55,7 @@ const Login = (props) => {
   }
   //
   const checkAccountExists = (callback) => {
-    fetch('https://idb-project-website.vercel.app/check-account', {
+    fetch('https://idb-project-website.vercel.app/auth-server/check-account', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const Login = (props) => {
   }
 
   const logIn = () => {
-    fetch('https://idb-project-website.vercel.app/auth', {
+    fetch('https://idb-project-website.vercel.app/auth-server/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
