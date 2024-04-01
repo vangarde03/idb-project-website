@@ -10,7 +10,7 @@ import Album from './album';
 import CreatePlaylist from './createPlaylist';
 import CreatePodcast from './createPodcast';
 import CreateAlbum from './createAlbum';
-
+import FollowArtist from './followArtist';
 
 import './App.css'
 import { useEffect, useState } from 'react'
@@ -39,9 +39,15 @@ function App() {
 
 
 
+
+
+
+
           <Route path="/adminHome" element={<AdminPage />} />
           <Route path="/playlist/:playlistId" element={<Playlist />} />
           <Route path="/createPlaylist/:listenerId" element={<CreatePlaylist />} />
+          <Route path="/followArtist/:userId" element={<FollowArtist />} />
+          {/* <Route path="/followArtist/:userId" element={<FollowArtist />} /> */}
 
 
 

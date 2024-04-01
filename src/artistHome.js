@@ -233,6 +233,17 @@ const ArtistHome = () => {
           )}
         </div>
       </div>
+      <div>
+        <button>
+          <Link to={`/followArtist/${state.alphaNumID}`}>Follow Artist</Link>
+        </button>
+        <button>
+          <Link to={`/followListener/${state.alphaNumID}`}>Follow Listener</Link>
+        </button>
+        <button>
+          <Link to={`/removeFollower/${state.alphaNumID}`}>Remove Follower</Link>
+        </button>
+      </div>
       <button>
         <Link to={`/createAlbum/${state.alphaNumID}`}>Create Album</Link>
       </button>

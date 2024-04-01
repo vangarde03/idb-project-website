@@ -225,6 +225,17 @@ const ListenHome = () => {
         </div>
       </div>
       <div>
+        <button>
+          <Link to={`/followArtist/${state.alphaNumID}`}>Follow Artist</Link>
+        </button>
+        <button>
+          <Link to={`/followListener/${state.alphaNumID}`}>Follow Listener</Link>
+        </button>
+        <button>
+          <Link to={`/removeFollower/${state.alphaNumID}`}>Remove Follower</Link>
+        </button>
+      </div>
+      <div>
         <h2>Recommended Songs</h2>
         <div className="song-recs">
           {/* Display user's podcasts */}
