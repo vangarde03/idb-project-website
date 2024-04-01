@@ -1,5 +1,3 @@
-// api/index.ts
-
 require("dotenv").config();
 const express = require("express");
 const { Pool } = require("pg");
@@ -38,7 +36,8 @@ const getUserID = async (user_id) => {
   }
 };
 
-export const authHandler = async (req, res) => {
+// Authentication handler
+app.post("/auth", async (req, res) => {
   const { email, password } = req.body;
   const user = await getUserByEmail(email);
 
@@ -73,13 +72,15 @@ export const authHandler = async (req, res) => {
   }
 
   res.json({ token });
-};
+});
 
-export const verifyHandler = (req, res) => {
+// Verification handler
+app.post("/verify", (req, res) => {
   res.status(501).json({ error: "Not implemented" });
-};
+});
 
-export const checkAccountHandler = async (req, res) => {
+// Check account handler
+app.post("/check-account", async (req, res) => {
   try {
     if (!req.body || !req.body.email) {
       return res.status(400).json({ error: "Invalid request format" });
@@ -99,6 +100,6 @@ export const checkAccountHandler = async (req, res) => {
       .status(500)
       .json({ error: "Internal server error", caughtError: error.message });
   }
-};
+});
 
 module.exports = app;
