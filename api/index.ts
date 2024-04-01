@@ -80,14 +80,12 @@ export const verifyHandler = (req, res) => {
 };
 
 export const checkAccountHandler = async (req, res) => {
-  const { email } = req.body;
-
-  const user = await getUserByEmail(email);
-  const userExists = !!user;
-
-  console.log(user);
-
   try {
+    if (!req.body || !req.body.email) {
+      return res.status(400).json({ error: "Invalid request format" });
+    }
+
+    const { email } = req.body;
     const user = await getUserByEmail(email);
     const userExists = !!user;
 
