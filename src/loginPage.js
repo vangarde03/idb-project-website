@@ -53,7 +53,7 @@ const Login = (props) => {
 
 
   }
-
+  //
   const checkAccountExists = (callback) => {
     fetch('http://localhost:3000/check-account', {
       method: 'POST',
