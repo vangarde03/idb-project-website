@@ -70,7 +70,7 @@ const ListenHome = () => {
 
     const fetchFollowedListeners = async () => {
       try {
-        const query = `SELECT followerlistener FROM followsbetweenlisteners WHERE followeelistener = '${state.alphaNumID}';`;
+        const query = `SELECT followeelistener FROM followsbetweenlisteners WHERE followerlistener = '${state.alphaNumID}';`;
         const response = await fetch('http://127.0.0.1:5000/query', {
           method: 'POST',
           headers: {
