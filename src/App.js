@@ -3,6 +3,7 @@ import Home from './userHome'
 import Login from './loginPage'
 import ListenHome from './listenHome'
 import Playlist from './playlist';
+import AdminPage from './adminHome';
 
 import './App.css'
 import { useEffect, useState } from 'react'
@@ -20,12 +21,9 @@ function App() {
 
           <Route path="/" element={<Home email={email} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
           <Route path="/loginPage" element={<Login setLoggedIn={setLoggedIn} setEmail={setEmail} />} />
-
-
-          <Route>
-            <Route path="/listenHome" element={<ListenHome email={email} loggedIn={loggedIn} />} />
-            <Route path="/playlist/:playlistId" element={<Playlist />} />
-          </Route>
+          <Route path="/listenHome" element={<ListenHome email={email} loggedIn={loggedIn} />} />
+          <Route path="/adminHome" element={<AdminPage />} />
+          <Route path="/playlist/:playlistId" element={<Playlist />} />
 
 
 

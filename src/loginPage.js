@@ -83,15 +83,39 @@ const Login = (props) => {
           localStorage.setItem('user', JSON.stringify({ email, user_id, user_type, username, token }));
           props.setLoggedIn(true);
           props.setEmail(email);
-          navigate('/listenHome', {
-            state: {
-              email: email,
-              user_id: user_id,
-              user_type: user_type,
-              username: username,
-              alphaNumID: alphaNumID,
-            }
-          }); // Pass user data to the ListenHome component
+          if (user_type == "listener") {
+            navigate('/listenHome', {
+              state: {
+                email: email,
+                user_id: user_id,
+                user_type: user_type,
+                username: username,
+                alphaNumID: alphaNumID,
+              }
+            }); // Pass user data to the ListenHome component
+          } else if (user_type == "artist") {
+            navigate('/artistHome', {
+              state: {
+                email: email,
+                user_id: user_id,
+                user_type: user_type,
+                username: username,
+                alphaNumID: alphaNumID,
+              }
+            });
+          }
+          else {
+            navigate('/adminHome', {
+              state: {
+                email: email,
+                user_id: user_id,
+                user_type: user_type,
+                username: username,
+                alphaNumID: alphaNumID,
+              }
+            });
+
+          }
         } else {
           window.alert('Wrong email or password ☹️');
         }
