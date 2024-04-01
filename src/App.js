@@ -6,6 +6,7 @@ import Playlist from './playlist';
 import AdminPage from './adminHome';
 import ArtistHome from './artistHome';
 import Podcast from './podcast';
+import Album from './album';
 
 import './App.css'
 import { useEffect, useState } from 'react'
@@ -27,6 +28,7 @@ function App() {
 
           <Route path="/ArtistHome" element={<ArtistHome email={email} loggedIn={loggedIn} />} />
           <Route path="/podcast/:podcastId" element={<Podcast />} />
+          <Route path="/album/:albumId" element={<Album />} />
 
 
           <Route path="/adminHome" element={<AdminPage />} />

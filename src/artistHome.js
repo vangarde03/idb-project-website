@@ -6,13 +6,13 @@ const ArtistHome = () => {
   const location = useLocation();
   const { state } = location;
   const { username } = state;
-  console.log(state.alphaNumID);
+  // console.log(state.alphaNumID);
 
   const [albums, setAlbums] = useState([]);
   const [podcasts, setPodcasts] = useState([]);
 
 
-  console.log(state.alphaNumID);
+  // console.log(state.alphaNumID);
 
   useEffect(() => {
     const fetchAlbums = async () => {
@@ -54,7 +54,7 @@ const ArtistHome = () => {
   }, []);
 
   console.log(albums);
-  console.log(podcasts);
+  // console.log(podcasts);
 
   return (
     <div>
@@ -65,7 +65,12 @@ const ArtistHome = () => {
           {albums && albums.length > 0 ? (
             <ul>
               {albums.map((album, index) => (
-                <li key={index}>{album}</li>
+                <li key={index}>
+                  <Link to={{
+                    pathname: `/album/${album[0]}`,
+                    state: state,  // Pass the state object here
+                  }}>{album[2]}</Link> - Genre: {album[3]}
+                </li>
               ))}
             </ul>
           ) : (
