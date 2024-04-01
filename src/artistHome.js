@@ -6,13 +6,13 @@ const ArtistHome = () => {
   const location = useLocation();
   const { state } = location;
   const { username } = state;
-  // console.log(state.alphaNumID);
 
   const [albums, setAlbums] = useState([]);
   const [podcasts, setPodcasts] = useState([]);
-
-
-  // console.log(state.alphaNumID);
+  const [followerListeners, setFollowerListeners] = useState([]);
+  const [followerArtists, setFollowerArtists] = useState([]);
+  const [followedListeners, setFollowedListeners] = useState([]);
+  const [followedArtists, setFollowedArtists] = useState([]);
 
   useEffect(() => {
     const fetchAlbums = async () => {
@@ -49,8 +49,80 @@ const ArtistHome = () => {
       }
     };
 
+    const fetchFollowerListeners = async () => {
+      try {
+        const query = `SELECT followerlistener FROM listenerfollowsartist WHERE followeeartist = '${state.alphaNumID}';`;
+        const response = await fetch('http://127.0.0.1:5000/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query })
+        });
+        const data = await response.json();
+        setFollowerListeners(data);
+      } catch (error) {
+        console.error('Error fetching follower listeners:', error);
+      }
+    };
+
+    const fetchFollowerArtists = async () => {
+      try {
+        const query = `SELECT followerartist FROM followsbetweenartists WHERE followeeartist = '${state.alphaNumID}';`;
+        const response = await fetch('http://127.0.0.1:5000/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query })
+        });
+        const data = await response.json();
+        setFollowerArtists(data);
+      } catch (error) {
+        console.error('Error fetching follower artists:', error);
+      }
+    };
+
+    const fetchFollowedListeners = async () => {
+      try {
+        const query = `SELECT followeelistener FROM artistfollowslistener WHERE followerartist = '${state.alphaNumID}';`;
+        const response = await fetch('http://127.0.0.1:5000/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query })
+        });
+        const data = await response.json();
+        setFollowedListeners(data);
+      } catch (error) {
+        console.error('Error fetching followed listeners:', error);
+      }
+    };
+
+    const fetchFollowedArtists = async () => {
+      try {
+        const query = `SELECT followeeartist FROM followsbetweenartists WHERE followerartist = '${state.alphaNumID}';`;
+        const response = await fetch('http://127.0.0.1:5000/query', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ query })
+        });
+        const data = await response.json();
+        setFollowedArtists(data);
+      } catch (error) {
+        console.error('Error fetching followed artists:', error);
+      }
+    };
+
     fetchAlbums();
     fetchPodcasts();
+    fetchFollowerListeners();
+    fetchFollowerArtists();
+    fetchFollowedListeners();
+    fetchFollowedArtists();
   }, []);
 
   // console.log(albums);
@@ -96,6 +168,68 @@ const ArtistHome = () => {
             </ul>
           ) : (
             <p>No podcasts found</p>
+          )}
+        </div>
+      </div>
+      <div>
+        <h2>Who Follows You</h2>
+        <div>
+          <h3>Follower Listeners:</h3>
+          {followerListeners.length > 0 ? (
+            <ul>
+              {followerListeners.map((listener, index) => (
+                <li key={index}>
+                  Follower Listener ID: {listener[0]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No follower listeners found</p>
+          )}
+        </div>
+        <div>
+          <h3>Follower Artists:</h3>
+          {followerArtists.length > 0 ? (
+            <ul>
+              {followerArtists.map((artist, index) => (
+                <li key={index}>
+                  Follower Artist ID: {artist[0]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No follower artists found</p>
+          )}
+        </div>
+      </div>
+      <div>
+        <h2>Who You Follow</h2>
+        <div>
+          <h3>Followed Listeners:</h3>
+          {followedListeners.length > 0 ? (
+            <ul>
+              {followedListeners.map((listener, index) => (
+                <li key={index}>
+                  Followed Listener ID: {listener[0]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No followed listeners found</p>
+          )}
+        </div>
+        <div>
+          <h3>Followed Artists:</h3>
+          {followedArtists.length > 0 ? (
+            <ul>
+              {followedArtists.map((artist, index) => (
+                <li key={index}>
+                  Followed Artist ID: {artist[0]}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No followed artists found</p>
           )}
         </div>
       </div>
