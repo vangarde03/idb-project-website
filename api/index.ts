@@ -19,6 +19,7 @@ const getUserByEmail = async (email) => {
     return rows[0];
   } catch (error) {
     console.error("Error fetching user by email:", error);
+    console.error("Error fetching user by email:", process.env.DATABASEURI);
     throw error;
   }
 };
