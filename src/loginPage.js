@@ -69,7 +69,7 @@ const Login = (props) => {
   }
 
   const logIn = () => {
-    fetch('http://https://idb-project-website.vercel.app/auth', {
+    fetch('https://idb-project-website.vercel.app/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
