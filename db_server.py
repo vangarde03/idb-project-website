@@ -29,6 +29,12 @@ def execute_query(query):
             cur.close()
             conn.close()
             return {'message': 'Query executed successfully'}
+        elif query.strip().upper().startswith('DELETE'):  # Handle DELETE queries
+            cur.execute(query)
+            conn.commit()
+            cur.close()
+            conn.close()
+            return {'message': 'DELETE query executed successfully'}
         else:
             return {'error': 'Unsupported query type'}
 

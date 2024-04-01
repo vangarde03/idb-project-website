@@ -12,6 +12,7 @@ import CreatePodcast from './createPodcast';
 import CreateAlbum from './createAlbum';
 import FollowArtist from './followArtist';
 import FollowListener from './followListener';
+import RemoveFoll from './removeFoll';
 
 import './App.css'
 import { useEffect, useState } from 'react'
@@ -49,6 +50,7 @@ function App() {
           <Route path="/createPlaylist/:listenerId" element={<CreatePlaylist />} />
           <Route path="/followArtist/:userId" element={<FollowArtist />} />
           <Route path="/followListener/:userId" element={<FollowListener />} />
+          <Route path="/removeFoll/:userId" element={<RemoveFoll />} />
 
 
 

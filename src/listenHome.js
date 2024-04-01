@@ -232,7 +232,7 @@ const ListenHome = () => {
           <Link to={`/followListener/${state.alphaNumID}`}>Follow Listener</Link>
         </button>
         <button>
-          <Link to={`/removeFollower/${state.alphaNumID}`}>Remove Follower</Link>
+          <Link to={`/removeFoll/${state.alphaNumID}`}>Remove Follower/Followee</Link>
         </button>
       </div>
       <div>
