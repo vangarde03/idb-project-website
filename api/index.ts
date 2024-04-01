@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const { Pool } = require("pg");
 
+process.env.DATABASEURI;
+
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -19,7 +21,7 @@ const getUserByEmail = async (email) => {
     return rows[0];
   } catch (error) {
     console.error("Error fetching user by email:", error);
-    console.error("Error fetching user by email:", process.env.DATABASEURI);
+
     throw error;
   }
 };
