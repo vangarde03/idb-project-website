@@ -336,6 +336,7 @@ const RemoveFoll = () => {
       } else {
         console.error('User ID not found in artist or listener table.');
       }
+      window.location.reload();
     } catch (error) {
       console.error('Error removing relationship:', error);
     }

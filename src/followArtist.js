@@ -100,6 +100,7 @@ const FollowArtist = () => {
       console.error('Error following artist:', error);
       setMessage('An error occurred while following the artist.');
     }
+
   };
 
 
