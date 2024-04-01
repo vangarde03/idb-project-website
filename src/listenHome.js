@@ -41,9 +41,11 @@ const ListenHome = () => {
     <div>
       <h1>Hello, {username}!</h1>
       <div>
-        {/* <Link to="/playlist"> */}
+
+        <h2>***Disclaimer***</h2>
+        <h3>Recordings cannot be listened to yet as mp3 files are yet to be added to the database (functionality coming soon...)</h3>
         <h2>My Playlists</h2>
-        {/* </Link> */}
+
         <div className="playlist-box">
           {playlists.length > 0 ? (
             <ul>
@@ -113,14 +115,14 @@ const ListenHome = () => {
         </div>
       </div>
       <button>
-        <Link to="/create-playlist">Create Playlist</Link>
+        <Link to={`/createPlaylist/${state.alphaNumID}`}>Create Playlist</Link>
       </button>
       <div>
         <Link to="/search">
           <button>Search</button>
         </Link>
       </div>
-    </div>
+    </div >
   );
 };
 
