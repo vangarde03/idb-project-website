@@ -103,32 +103,65 @@ app.post("/verify", (req, res) => {
   res.status(501).json({ error: "Not implemented" });
 });
 
-// Flag to differentiate between original requests and redirected requests
-let redirecting = false;
+app.get("/loginPage", (req, res) => {
+  res.redirect("/loginPage");
+});
 
-// Catch-all route for GET requests
-// Catch-all route for GET requests
-const excludedRoutes = ["/loginPage"];
+app.get("/listenHome", (req, res) => {
+  res.redirect("/listenHome");
+});
 
-// Catch-all route for GET requests
-app.get("*", (req, res, next) => {
-  // Check if the request is for the UI
-  if (req.accepts("html") && !excludedRoutes.includes(req.path)) {
-    if (!redirecting) {
-      // Set flag to indicate redirection
-      redirecting = true;
-      // Reload the page by redirecting to the same URL
-      res.redirect(req.originalUrl);
-    } else {
-      // Reset flag for subsequent requests
-      redirecting = false;
-      // Allow the request to pass through without redirection
-      next();
-    }
-  } else {
-    // If the request is not for the UI, allow it to pass through without redirection
-    next();
-  }
+app.get("/ArtistHome", (req, res) => {
+  res.redirect("/ArtistHome");
+});
+
+app.get("/podcast/:podcastId", (req, res) => {
+  const podcastId = req.params.podcastId;
+  res.redirect(`/podcast/${podcastId}`);
+});
+
+app.get("/album/:albumId", (req, res) => {
+  const albumId = req.params.albumId;
+  res.redirect(`/album/${albumId}`);
+});
+
+app.get("/createPodcast/:artistId", (req, res) => {
+  const artistId = req.params.artistId;
+  res.redirect(`/createPodcast/${artistId}`);
+});
+
+app.get("/createAlbum/:artistId", (req, res) => {
+  const artistId = req.params.artistId;
+  res.redirect(`/createAlbum/${artistId}`);
+});
+
+app.get("/adminHome", (req, res) => {
+  res.redirect("/adminHome");
+});
+
+app.get("/playlist/:playlistId", (req, res) => {
+  const playlistId = req.params.playlistId;
+  res.redirect(`/playlist/${playlistId}`);
+});
+
+app.get("/createPlaylist/:listenerId", (req, res) => {
+  const listenerId = req.params.listenerId;
+  res.redirect(`/createPlaylist/${listenerId}`);
+});
+
+app.get("/followArtist/:userId", (req, res) => {
+  const userId = req.params.userId;
+  res.redirect(`/followArtist/${userId}`);
+});
+
+app.get("/followListener/:userId", (req, res) => {
+  const userId = req.params.userId;
+  res.redirect(`/followListener/${userId}`);
+});
+
+app.get("/removeFoll/:userId", (req, res) => {
+  const userId = req.params.userId;
+  res.redirect(`/removeFoll/${userId}`);
 });
 
 // Check account handler
