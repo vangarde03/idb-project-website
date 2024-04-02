@@ -53,6 +53,7 @@ app.post("/query", async (req, res) => {
   const { query } = req.body;
   try {
     const result = await executeQuery(query);
+    console.log(result);
     res.send(result); // Send the raw response data without transformation
   } catch (error) {
     console.error("Error processing query:", error);
