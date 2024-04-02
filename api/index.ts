@@ -108,9 +108,12 @@ let redirecting = false;
 
 // Catch-all route for GET requests
 // Catch-all route for GET requests
+const excludedRoutes = ["/loginPage"];
+
+// Catch-all route for GET requests
 app.get("*", (req, res, next) => {
   // Check if the request is for the UI
-  if (req.accepts("html")) {
+  if (req.accepts("html") && !excludedRoutes.includes(req.path)) {
     if (!redirecting) {
       // Set flag to indicate redirection
       redirecting = true;
