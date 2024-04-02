@@ -57,7 +57,7 @@ const Login = (props) => {
   //
   const checkAccountExists = (callback) => {
     // In loginPage.js
-    fetch('/check-account', { // Assuming your React app and Express server are running on the same domain
+    fetch('/api/check-account', { // Assuming your React app and Express server are running on the same domain
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ const Login = (props) => {
   }
 
   const logIn = () => {
-    fetch('/auth', {
+    fetch('/api/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
