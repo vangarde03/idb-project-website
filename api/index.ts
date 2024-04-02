@@ -104,6 +104,7 @@ app.post("/verify", (req, res) => {
 });
 
 app.get("*", (req, res) => {
+  console.log("hi");
   // Do nothing, let the request pass through
 });
 
