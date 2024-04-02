@@ -41,7 +41,7 @@ const RemoveFoll = () => {
   const isInArtistTable = async (userId) => {
     try {
       const artistQuery = `SELECT * FROM artist WHERE artist_id = '${userId}';`;
-      const artistResponse = await fetch('http://34.148.215.131:8111/query/', {
+      const artistResponse = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ const RemoveFoll = () => {
       }
 
       const listenerQuery = `SELECT * FROM listener WHERE listener_id = '${userId}';`;
-      const listenerResponse = await fetch('http://34.148.215.131:8111/query/', {
+      const listenerResponse = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -78,7 +78,7 @@ const RemoveFoll = () => {
   const fetchArtistFollowersA = async (artistId) => {
     try {
       const query = `SELECT followerartist FROM followsbetweenartists WHERE followeeartist = '${artistId}';`;
-      const response = await fetch('http://34.148.215.131:8111/query/', {
+      const response = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -95,7 +95,7 @@ const RemoveFoll = () => {
   const fetchArtistFolloweesA = async (artistId) => {
     try {
       const query = `SELECT followeeartist FROM followsbetweenartists WHERE followerartist = '${artistId}';`;
-      const response = await fetch('http://34.148.215.131:8111/query/', {
+      const response = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -112,7 +112,7 @@ const RemoveFoll = () => {
   const fetchListenerFollowersA = async (artistId) => {
     try {
       const query = `SELECT followerlistener FROM listenerfollowsartist WHERE followeeartist = '${artistId}';`;
-      const response = await fetch('http://34.148.215.131:8111/query/', {
+      const response = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -129,7 +129,7 @@ const RemoveFoll = () => {
   const fetchListenerFolloweesA = async (artistId) => {
     try {
       const query = `SELECT followeelistener FROM artistfollowslistener WHERE followerartist = '${artistId}';`;
-      const response = await fetch('http://34.148.215.131:8111/query/', {
+      const response = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -146,7 +146,7 @@ const RemoveFoll = () => {
   const fetchArtistFollowers = async (artistId) => {
     try {
       const query = `SELECT followerartist FROM artistfollowslistener WHERE followeelistener = '${artistId}';`;
-      const response = await fetch('http://34.148.215.131:8111/query/', {
+      const response = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -163,7 +163,7 @@ const RemoveFoll = () => {
   const fetchArtistFollowees = async (listenerId) => {
     try {
       const query = `SELECT followeeartist FROM listenerfollowsartist WHERE followerlistener = '${listenerId}';`;
-      const response = await fetch('http://34.148.215.131:8111/query/', {
+      const response = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -180,7 +180,7 @@ const RemoveFoll = () => {
   const fetchListenerFollowers = async (listenerId) => {
     try {
       const query = `SELECT followerlistener FROM followsbetweenlisteners WHERE followeelistener = '${listenerId}';`;
-      const response = await fetch('http://34.148.215.131:8111/query/', {
+      const response = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -197,7 +197,7 @@ const RemoveFoll = () => {
   const fetchListenerFollowees = async (listenerId) => {
     try {
       const query = `SELECT followeelistener FROM followsbetweenlisteners WHERE followerlistener = '${listenerId}';`;
-      const response = await fetch('http://34.148.215.131:8111/query/', {
+      const response = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -218,7 +218,7 @@ const RemoveFoll = () => {
   const isInListenerTable = async (userId) => {
     try {
       const query = `SELECT * FROM listener WHERE listener_id = '${userId}';`;
-      const response = await fetch('http://34.148.215.131:8111/query/', {
+      const response = await fetch('https://34.148.215.131:8111/query/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -253,7 +253,7 @@ const RemoveFoll = () => {
         if (isArtist) {
           if (!isFollower) {
             const query = `DELETE FROM followsbetweenartists WHERE followerartist = '${userId}' AND followeeartist = '${followerOrFolloweeId}';`;
-            await fetch('http://34.148.215.131:8111/query/', {
+            await fetch('https://34.148.215.131:8111/query/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -262,7 +262,7 @@ const RemoveFoll = () => {
             });
           } else {
             const query = `DELETE FROM followsbetweenartists WHERE followerartist = '${followerOrFolloweeId}' AND followeeartist = '${userId}';`;
-            await fetch('http://34.148.215.131:8111/query/', {
+            await fetch('https://34.148.215.131:8111/query/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -273,7 +273,7 @@ const RemoveFoll = () => {
         } else {
           if (isFollower) {
             const query = `DELETE FROM listenerfollowsartist WHERE followerlistener = '${followerOrFolloweeId}' AND followeeartist = '${userId}';`;
-            await fetch('http://34.148.215.131:8111/query/', {
+            await fetch('https://34.148.215.131:8111/query/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -282,7 +282,7 @@ const RemoveFoll = () => {
             });
           } else {
             const query = `DELETE FROM artistfollowslistener WHERE followeelistener = '${followerOrFolloweeId}' AND followerartist = '${userId}';`;
-            await fetch('http://34.148.215.131:8111/query/', {
+            await fetch('https://34.148.215.131:8111/query/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -295,7 +295,7 @@ const RemoveFoll = () => {
         if (isArtist) {
           if (!isFollower) {
             const query = `DELETE FROM listenerfollowsartist WHERE followerlistener = '${userId}' AND followeeartist = '${followerOrFolloweeId}';`;
-            await fetch('http://34.148.215.131:8111/query/', {
+            await fetch('https://34.148.215.131:8111/query/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -304,7 +304,7 @@ const RemoveFoll = () => {
             });
           } else {
             const query = `DELETE FROM artistfollowslistener WHERE followeelistener = '${userId}' AND followerartist = '${followerOrFolloweeId}';`;
-            await fetch('http://34.148.215.131:8111/query/', {
+            await fetch('https://34.148.215.131:8111/query/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -315,7 +315,7 @@ const RemoveFoll = () => {
         } else {
           if (isFollower) {
             const query = `DELETE FROM followsbetweenlisteners WHERE followerlistener = '${followerOrFolloweeId}' AND followeelistener = '${userId}';`;
-            await fetch('http://34.148.215.131:8111/query/', {
+            await fetch('https://34.148.215.131:8111/query/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
@@ -324,7 +324,7 @@ const RemoveFoll = () => {
             });
           } else {
             const query = `DELETE FROM followsbetweenlisteners WHERE followeelistener = '${followerOrFolloweeId}' AND followerlistener = '${userId}';`;
-            await fetch('http://34.148.215.131:8111/query/', {
+            await fetch('https://34.148.215.131:8111/query/', {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json'
