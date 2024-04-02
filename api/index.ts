@@ -106,11 +106,11 @@ app.post("/verify", (req, res) => {
 app.use((req, res, next) => {
   // Check if the request is a GET request and the URL is not the API route
   if (req.method === "GET" && req.url !== "/api") {
-    // Redirect the GET request back to the same URL
-    return res.redirect(req.originalUrl);
+    // Do not redirect GET requests
+    return next();
   }
-  // If the request is not a GET request or it's the API route, proceed to the next middleware/route
-  next();
+  // For all other requests or non-GET requests to non-API routes, redirect them back to the same URL
+  res.redirect(req.originalUrl);
 });
 
 app.get("/your-route", (req, res) => {
