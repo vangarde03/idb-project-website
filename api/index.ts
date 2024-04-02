@@ -103,9 +103,21 @@ app.post("/verify", (req, res) => {
   res.status(501).json({ error: "Not implemented" });
 });
 
+// Flag to differentiate between original requests and redirected requests
+let redirecting = false;
+
+// Catch-all route for GET requests
 app.get("*", (req, res) => {
-  // Reload the page by redirecting to the same URL
-  res.redirect(req.originalUrl);
+  if (!redirecting) {
+    // Set flag to indicate redirection
+    redirecting = true;
+    // Reload the page by redirecting to the same URL
+    res.redirect(req.originalUrl);
+  } else {
+    // Reset flag for subsequent requests
+    redirecting = false;
+    // Allow the request to pass through without redirection
+  }
 });
 
 // Check account handler
