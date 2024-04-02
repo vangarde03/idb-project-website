@@ -12,7 +12,7 @@ const Podcast = () => {
     const fetchPodcastInfo = async () => {
       try {
         const query = `SELECT podcast_name, follower_count, episodes_count, recording_ids FROM podcasts WHERE podcast_id = '${podcastId}';`;
-        const response = await fetch('http://10.142.0.2:8111/query', {
+        const response = await fetch('http://34.148.215.131:8111/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ const Podcast = () => {
         console.log(recordingIds);
         const query = `SELECT * FROM recording WHERE recording_id IN (${recordingIds.map(id => `'${id}'`).join(',')});`;
         try {
-          const response = await fetch('http://10.142.0.2:8111/query', {
+          const response = await fetch('http://34.148.215.131:8111/query', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

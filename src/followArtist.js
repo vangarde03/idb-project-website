@@ -21,7 +21,7 @@ const FollowArtist = () => {
 
 
         // Send a POST request to the server with the SQL query
-        const response = await fetch('http://10.142.0.2:8111/query', {
+        const response = await fetch('http://34.148.215.131:8111/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ const FollowArtist = () => {
   const isInArtistTable = async (userId) => {
     try {
       const query = `SELECT artist_id FROM artist WHERE artist_id = '${userId}';`;
-      const response = await fetch('http://10.142.0.2:8111/query', {
+      const response = await fetch('http://34.148.215.131:8111/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -83,7 +83,7 @@ const FollowArtist = () => {
       const query = `INSERT INTO ${tableName} (follower${isInArtist ? 'artist' : 'listener'}, followeeartist) VALUES ('${userId}', '${selectedArtist}');`;
 
       // Send a POST request to the server to execute the query
-      const response = await fetch('http://10.142.0.2:8111/query', {
+      const response = await fetch('http://34.148.215.131:8111/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
