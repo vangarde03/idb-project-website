@@ -20,7 +20,7 @@ const ListenHome = () => {
     const fetchPlaylists = async () => {
       try {
         const query = `SELECT title, number_of_likes, playlist_id FROM playlist WHERE listener_id = '${state.alphaNumID}';`;
-        const response = await fetch('https://34.148.215.131:8111/query/', {
+        const response = await fetch('/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ const ListenHome = () => {
     const fetchFollowerListeners = async () => {
       try {
         const query = `SELECT followerlistener FROM followsbetweenlisteners WHERE followeelistener = '${state.alphaNumID}';`;
-        const response = await fetch('https://34.148.215.131:8111/query/', {
+        const response = await fetch('/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ const ListenHome = () => {
     const fetchFollowerArtists = async () => {
       try {
         const query = `SELECT followerartist FROM artistfollowslistener WHERE followeelistener = '${state.alphaNumID}';`;
-        const response = await fetch('https://34.148.215.131:8111/query/', {
+        const response = await fetch('/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -71,7 +71,7 @@ const ListenHome = () => {
     const fetchFollowedListeners = async () => {
       try {
         const query = `SELECT followeelistener FROM followsbetweenlisteners WHERE followerlistener = '${state.alphaNumID}';`;
-        const response = await fetch('https://34.148.215.131:8111/query/', {
+        const response = await fetch('/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -88,7 +88,7 @@ const ListenHome = () => {
     const fetchFollowedArtists = async () => {
       try {
         const query = `SELECT followeeartist FROM listenerfollowsartist WHERE followerlistener = '${state.alphaNumID}';`;
-        const response = await fetch('https://34.148.215.131:8111/query/', {
+        const response = await fetch('/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

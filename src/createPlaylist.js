@@ -15,7 +15,7 @@ const CreatePlaylist = ({ }) => {
   const handleSearch = async () => {
     try {
       const query = `SELECT * FROM recording WHERE recording_name LIKE '%${searchTerm}%'`;
-      const response = await fetch('https://34.148.215.131:8111/query/', {
+      const response = await fetch('/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ const CreatePlaylist = ({ }) => {
         return;
       }
 
-      const response = await fetch('https://34.148.215.131:8111/query/', {
+      const response = await fetch('/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ const CreatePlaylist = ({ }) => {
   const checkPlaylistIdExists = async (playlistId) => {
     try {
       const query = `SELECT COUNT(*) AS count FROM playlist WHERE playlist_id = '${playlistId}'`;
-      const response = await fetch('https://34.148.215.131:8111/query/', {
+      const response = await fetch('/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

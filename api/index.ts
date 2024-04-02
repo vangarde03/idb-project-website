@@ -38,6 +38,27 @@ const getUserID = async (user_id) => {
     return null;
   }
 };
+const executeQuery = async (query: string) => {
+  try {
+    const { rows } = await pool.query(query);
+    return rows;
+  } catch (error) {
+    console.error("Error executing query:", error);
+    throw error;
+  }
+};
+
+// Route to handle queries
+app.post("/query", async (req, res) => {
+  const { query } = req.body;
+  try {
+    const result = await executeQuery(query);
+    res.json(result);
+  } catch (error) {
+    console.error("Error processing query:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 // Authentication handler
 app.post("/auth", async (req, res) => {
