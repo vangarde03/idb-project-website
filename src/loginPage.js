@@ -9,12 +9,6 @@ const Login = (props) => {
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    // Detect page reload and reload the page
-    if (performance.navigation.type === 1) {
-      window.location.reload();
-    }
-  }, []);
 
   const onButtonClick = () => {
     // Set initial error values to empty
