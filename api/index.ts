@@ -103,6 +103,10 @@ app.post("/verify", (req, res) => {
   res.status(501).json({ error: "Not implemented" });
 });
 
+app.get("*", (req, res) => {
+  // Do nothing, let the request pass through
+});
+
 // Check account handler
 app.post("/check-account", async (req, res) => {
   try {
