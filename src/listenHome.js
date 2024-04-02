@@ -112,6 +112,7 @@ const ListenHome = () => {
     fetchFollowedArtists();
   }, []);
 
+  console.log(playlists);
 
   return (
     <div>
