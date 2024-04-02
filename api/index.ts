@@ -103,10 +103,20 @@ app.post("/verify", (req, res) => {
   res.status(501).json({ error: "Not implemented" });
 });
 
-// app.get("*", (req, res) => {
-//   // Reload the page by redirecting to the same URL
-//   res.redirect(req.originalUrl);
-// });
+app.use((req, res, next) => {
+  // Check if the request is a GET request and the URL is not the API route
+  if (req.method === "GET" && req.url !== "/api") {
+    // Redirect the GET request back to the same URL
+    return res.redirect(req.originalUrl);
+  }
+  // If the request is not a GET request or it's the API route, proceed to the next middleware/route
+  next();
+});
+
+app.get("/your-route", (req, res) => {
+  // Your route handler logic here
+  res.send("This is the response for /your-route");
+});
 
 // Check account handler
 app.post("/check-account", async (req, res) => {
