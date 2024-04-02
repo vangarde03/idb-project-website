@@ -21,7 +21,7 @@ const FollowListener = () => {
                         SELECT followeelistener FROM artistFollowsListener WHERE followerartist = '${userId}');`;
 
         // Send a POST request to the server with the SQL query
-        const response = await fetch('http://127.0.0.1:5000/query', {
+        const response = await fetch('http://10.142.0.2:8111/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const FollowListener = () => {
   const isInArtistTable = async (userId) => {
     try {
       const query = `SELECT artist_id FROM artist WHERE artist_id = '${userId}';`;
-      const response = await fetch('http://127.0.0.1:5000/query', {
+      const response = await fetch('http://10.142.0.2:8111/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -82,7 +82,7 @@ const FollowListener = () => {
         const queryFollowArtist = `INSERT INTO artistfollowslistener (followerartist, followeelistener) VALUES ('${userId}', '${selectedListener}');`;
 
         // Send a POST request to the server to execute the query to follow the listener
-        const responseFollowListener = await fetch('http://127.0.0.1:5000/query', {
+        const responseFollowListener = await fetch('http://10.142.0.2:8111/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -91,7 +91,7 @@ const FollowListener = () => {
         });
 
         // Send a POST request to the server to execute the query to insert into artistfollowslistener
-        const responseFollowArtist = await fetch('http://127.0.0.1:5000/query', {
+        const responseFollowArtist = await fetch('http://10.142.0.2:8111/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -106,7 +106,7 @@ const FollowListener = () => {
         }
       } else {
         // If the follower is not an artist, only insert into followsbetweenlisteners table
-        const response = await fetch('http://127.0.0.1:5000/query', {
+        const response = await fetch('http://10.142.0.2:8111/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

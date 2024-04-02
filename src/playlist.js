@@ -13,7 +13,7 @@ const Playlist = () => {
     const fetchPlaylistInfo = async () => {
       try {
         const query = `SELECT title, number_of_likes, recording_ids FROM playlist WHERE playlist_id = '${playlistId}';`;
-        const response = await fetch('http://127.0.0.1:5000/query', {
+        const response = await fetch('http://10.142.0.2:8111/query', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ const Playlist = () => {
         const recordingIds = playlistInfo[0][2]; // Assuming recording_ids is an array of recording IDs
         const query = `SELECT * FROM recording WHERE recording_id IN (${recordingIds.map(id => `'${id}'`).join(',')});`;
         try {
-          const response = await fetch('http://127.0.0.1:5000/query', {
+          const response = await fetch('http://10.142.0.2:8111/query', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

@@ -41,7 +41,7 @@ const CreateAlbum = () => {
 
       const releaseDateFormatted = formatReleaseDate(releaseDate);
 
-      const response = await fetch('http://127.0.0.1:5000/query', {
+      const response = await fetch('http://34.75.229.15:5000/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ const CreateAlbum = () => {
   const handleSearch = async () => {
     try {
       const query = `SELECT * FROM recording WHERE type = 'song' AND recording_name LIKE '%${searchTerm}%'`;
-      const response = await fetch('http://127.0.0.1:5000/query', {
+      const response = await fetch('http://34.75.229.15:5000/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -106,7 +106,7 @@ const CreateAlbum = () => {
   // Function to check if the generated album ID already exists in the database
   const checkAlbumIdExists = async (albumId) => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/query', {
+      const response = await fetch('http://34.75.229.15:5000/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

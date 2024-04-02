@@ -41,7 +41,7 @@ const CreatePodcast = ({ }) => {
       const recordingIds = selectedRecordings.map(recording => recording[0]);
       const episodeCount = recordingIds.length;
 
-      const response = await fetch('http://127.0.0.1:5000/query', {
+      const response = await fetch('http://10.142.0.2:8111/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -63,7 +63,7 @@ const CreatePodcast = ({ }) => {
   const handleSearch = async () => {
     try {
       const query = `SELECT * FROM recording WHERE type = 'podcastEpisode' AND recording_name LIKE '%${searchTerm}%'`;
-      const response = await fetch('http://127.0.0.1:5000/query', {
+      const response = await fetch('http://10.142.0.2:8111/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -107,7 +107,7 @@ const CreatePodcast = ({ }) => {
   // Function to check if the generated podcast ID already exists in the database
   const checkPodcastIdExists = async (podcastId) => {
     try {
-      const response = await fetch('http://127.0.0.1:5000/query', {
+      const response = await fetch('http://10.142.0.2:8111/query', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
