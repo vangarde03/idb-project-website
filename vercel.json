@@ -2,7 +2,7 @@
   "version": 2,
   "rewrites": [
     { "source": "/query", "destination": "/api/query" },
-
+    { "source": "/api/check-account", "destination": "/check-account" },
     { "source": "/(.*)", "destination": "/" }
   ]
 }
