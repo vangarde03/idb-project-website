@@ -103,66 +103,10 @@ app.post("/verify", (req, res) => {
   res.status(501).json({ error: "Not implemented" });
 });
 
-app.get("/loginPage", (req, res) => {
-  res.redirect("/loginPage");
-});
-
-app.get("/listenHome", (req, res) => {
-  res.redirect("/listenHome");
-});
-
-app.get("/ArtistHome", (req, res) => {
-  res.redirect("/ArtistHome");
-});
-
-app.get("/podcast/:podcastId", (req, res) => {
-  const podcastId = req.params.podcastId;
-  res.redirect(`/podcast/${podcastId}`);
-});
-
-app.get("/album/:albumId", (req, res) => {
-  const albumId = req.params.albumId;
-  res.redirect(`/album/${albumId}`);
-});
-
-app.get("/createPodcast/:artistId", (req, res) => {
-  const artistId = req.params.artistId;
-  res.redirect(`/createPodcast/${artistId}`);
-});
-
-app.get("/createAlbum/:artistId", (req, res) => {
-  const artistId = req.params.artistId;
-  res.redirect(`/createAlbum/${artistId}`);
-});
-
-app.get("/adminHome", (req, res) => {
-  res.redirect("/adminHome");
-});
-
-app.get("/playlist/:playlistId", (req, res) => {
-  const playlistId = req.params.playlistId;
-  res.redirect(`/playlist/${playlistId}`);
-});
-
-app.get("/createPlaylist/:listenerId", (req, res) => {
-  const listenerId = req.params.listenerId;
-  res.redirect(`/createPlaylist/${listenerId}`);
-});
-
-app.get("/followArtist/:userId", (req, res) => {
-  const userId = req.params.userId;
-  res.redirect(`/followArtist/${userId}`);
-});
-
-app.get("/followListener/:userId", (req, res) => {
-  const userId = req.params.userId;
-  res.redirect(`/followListener/${userId}`);
-});
-
-app.get("/removeFoll/:userId", (req, res) => {
-  const userId = req.params.userId;
-  res.redirect(`/removeFoll/${userId}`);
-});
+// app.get("*", (req, res) => {
+//   // Reload the page by redirecting to the same URL
+//   res.redirect(req.originalUrl);
+// });
 
 // Check account handler
 app.post("/check-account", async (req, res) => {
