@@ -1,7 +1,7 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/check-account", "destination": "//check-account" },
+    { "source": "/check-account", "destination": "/check-account" },
     { "source": "/query", "destination": "/query" },
     { "source": "/auth", "destination": "/auth" },
     { "source": "/(.*)", "destination": "/$1" }
