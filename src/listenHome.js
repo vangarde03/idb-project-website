@@ -62,6 +62,7 @@ const ListenHome = () => {
           body: JSON.stringify({ query })
         });
         const data = await response.json();
+        console.log(data);
         setFollowerArtists(data);
       } catch (error) {
         console.error('Error fetching follower artists:', error);
