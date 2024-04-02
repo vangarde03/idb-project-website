@@ -13,6 +13,9 @@ const ArtistHome = () => {
   const [followerArtists, setFollowerArtists] = useState([]);
   const [followedListeners, setFollowedListeners] = useState([]);
   const [followedArtists, setFollowedArtists] = useState([]);
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
 
   useEffect(() => {
     const fetchAlbums = async () => {
@@ -25,7 +28,7 @@ const ArtistHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setAlbums(data);
       } catch (error) {
         console.error('Error fetching albums:', error);
@@ -42,7 +45,7 @@ const ArtistHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setPodcasts(data);
       } catch (error) {
         console.error('Error fetching podcasts:', error);
@@ -59,7 +62,7 @@ const ArtistHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setFollowerListeners(data);
       } catch (error) {
         console.error('Error fetching follower listeners:', error);
@@ -76,7 +79,7 @@ const ArtistHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setFollowerArtists(data);
       } catch (error) {
         console.error('Error fetching follower artists:', error);
@@ -93,7 +96,7 @@ const ArtistHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setFollowedListeners(data);
       } catch (error) {
         console.error('Error fetching followed listeners:', error);
@@ -110,7 +113,7 @@ const ArtistHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setFollowedArtists(data);
       } catch (error) {
         console.error('Error fetching followed artists:', error);

@@ -8,6 +8,10 @@ const Playlist = () => {
   const location = useLocation();
   // const state = location;
   // console.log(state);
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
+
 
   useEffect(() => {
     const fetchPlaylistInfo = async () => {
@@ -23,7 +27,7 @@ const Playlist = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch playlist information');
         }
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setPlaylistInfo(data);
       } catch (error) {
         console.error('Error fetching playlist:', error);
@@ -50,7 +54,7 @@ const Playlist = () => {
           if (!response.ok) {
             throw new Error('Failed to fetch recording details');
           }
-          const data = await response.json();
+          const data = convertDataToArrayOfArrays(await response.json());
 
           console.log(data);
           setPlaylistInfo(prevState => ({ ...prevState, recordings: data }));

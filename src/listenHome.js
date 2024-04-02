@@ -23,6 +23,7 @@ const ListenHome = () => {
   const [followedArtists, setFollowedArtists] = useState([]);
 
 
+
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {

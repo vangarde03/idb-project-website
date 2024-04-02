@@ -12,6 +12,10 @@ const CreatePodcast = ({ }) => {
   const [selectedRecordings, setSelectedRecordings] = useState([]);
   const { artistId } = useParams();
 
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
+
 
   useEffect(() => {
     // Fetch initial search results when component mounts
@@ -73,7 +77,7 @@ const CreatePodcast = ({ }) => {
       if (!response.ok) {
         throw new Error('Failed to fetch search results');
       }
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setSearchResults(data);
     } catch (error) {
       setError(error.message);
@@ -119,7 +123,7 @@ const CreatePodcast = ({ }) => {
       if (!response.ok) {
         throw new Error('Failed to check podcast ID existence');
       }
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       // If count is greater than 0, podcast ID exists
       return data[0].count > 0;
     } catch (error) {

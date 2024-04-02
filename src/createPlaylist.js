@@ -10,6 +10,10 @@ const CreatePlaylist = ({ }) => {
   const [error, setError] = useState(null);
   const { listenerId } = useParams();
 
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
+
 
   // Function to handle recording search
   const handleSearch = async () => {
@@ -25,7 +29,7 @@ const CreatePlaylist = ({ }) => {
       if (!response.ok) {
         throw new Error('Failed to fetch search results');
       }
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setSearchResults(data);
     } catch (error) {
       setError(error.message);
@@ -110,7 +114,7 @@ const CreatePlaylist = ({ }) => {
       if (!response.ok) {
         throw new Error('Failed to check playlist ID existence');
       }
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       // If count is greater than 0, playlist ID exists
       return data[0].count > 0;
     } catch (error) {

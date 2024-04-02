@@ -6,6 +6,10 @@ const Album = () => {
   const [albumInfo, setAlbumInfo] = useState(null);
   const [error, setError] = useState(null);
 
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
+
   useEffect(() => {
     const fetchAlbumInfo = async () => {
       try {
@@ -20,7 +24,7 @@ const Album = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch album information');
         }
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setAlbumInfo(data);
       } catch (error) {
         console.error('Error fetching album:', error);
@@ -47,7 +51,7 @@ const Album = () => {
           if (!response.ok) {
             throw new Error('Failed to fetch recording details');
           }
-          const data = await response.json();
+          const data = convertDataToArrayOfArrays(await response.json());
           setAlbumInfo(prevState => ({ ...prevState, recordings: data }));
         } catch (error) {
           console.error('Error fetching recording details:', error);

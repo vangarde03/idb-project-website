@@ -10,6 +10,9 @@ const CreateAlbum = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const { artistId } = useParams();
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
 
   useEffect(() => {
     // Fetch initial search results when component mounts
@@ -73,7 +76,7 @@ const CreateAlbum = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch search results');
       }
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setSearchResults(data);
     } catch (error) {
       setError(error.message);
@@ -118,7 +121,7 @@ const CreateAlbum = () => {
       if (!response.ok) {
         throw new Error('Failed to check album ID existence');
       }
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       // If count is greater than 0, album ID exists
       return (data ? data[0].count : 0);
     } catch (error) {

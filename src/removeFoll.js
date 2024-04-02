@@ -8,6 +8,10 @@ const RemoveFoll = () => {
   const [followerListeners, setFollowerListeners] = useState([]);
   const [followeeListeners, setFolloweeListeners] = useState([]);
 
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
+
   useEffect(() => {
     const fetchFollowersAndFollowees = async () => {
       try {
@@ -48,7 +52,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query: artistQuery })
       });
-      const artistData = await artistResponse.json();
+      const artistData = convertDataToArrayOfArrays(await artistResponse.json());
 
       if (artistData.length > 0) {
         return true;
@@ -62,7 +66,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query: listenerQuery })
       });
-      const listenerData = await listenerResponse.json();
+      const listenerData = convertDataToArrayOfArrays(await listenerResponse.json());
 
       if (listenerData.length > 0) {
         return false;
@@ -85,7 +89,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setFollowerArtists(data);
     } catch (error) {
       console.error('Error fetching followers:', error);
@@ -102,7 +106,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setFolloweeArtists(data);
     } catch (error) {
       console.error('Error fetching followees:', error);
@@ -119,7 +123,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setFollowerListeners(data);
     } catch (error) {
       console.error('Error fetching followers:', error);
@@ -136,7 +140,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setFolloweeListeners(data);
     } catch (error) {
       console.error('Error fetching followees:', error);
@@ -153,7 +157,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setFollowerArtists(data);
     } catch (error) {
       console.error('Error fetching followers:', error);
@@ -170,7 +174,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setFolloweeArtists(data);
     } catch (error) {
       console.error('Error fetching followees:', error);
@@ -187,7 +191,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setFollowerListeners(data);
     } catch (error) {
       console.error('Error fetching followers:', error);
@@ -204,7 +208,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       setFolloweeListeners(data);
     } catch (error) {
       console.error('Error fetching followees:', error);
@@ -225,7 +229,7 @@ const RemoveFoll = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       return data.length > 0; // If data is returned, the user ID exists in the listener table
     } catch (error) {
       console.error('Error checking if user is in listener table:', error);

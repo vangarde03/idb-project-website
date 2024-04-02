@@ -8,6 +8,11 @@ const Podcast = () => {
 
   console.log(podcastId);
 
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
+
+
   useEffect(() => {
     const fetchPodcastInfo = async () => {
       try {
@@ -22,7 +27,7 @@ const Podcast = () => {
         if (!response.ok) {
           throw new Error('Failed to fetch podcast information');
         }
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setPodcastInfo(data);
       } catch (error) {
         console.error('Error fetching podcast:', error);
@@ -52,7 +57,7 @@ const Podcast = () => {
           if (!response.ok) {
             throw new Error('Failed to fetch recording details');
           }
-          const data = await response.json();
+          const data = convertDataToArrayOfArrays(await response.json());
 
 
           setPodcastInfo(prevState => ({ ...prevState, recordings: data }));

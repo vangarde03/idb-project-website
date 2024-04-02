@@ -9,6 +9,12 @@ const FollowListener = () => {
   const [message, setMessage] = useState('');
   const { userId } = useParams();
 
+
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
+
+
   useEffect(() => {
     // Fetch listeners based on the search query
     const fetchListeners = async () => {
@@ -30,7 +36,7 @@ const FollowListener = () => {
         });
 
         // Parse the response data
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setListeners(data);
       } catch (error) {
         console.error('Error fetching listeners:', error);
@@ -60,7 +66,7 @@ const FollowListener = () => {
         },
         body: JSON.stringify({ query })
       });
-      const data = await response.json();
+      const data = convertDataToArrayOfArrays(await response.json());
       return data.length > 0; // If data is returned, the user ID exists in the artist table
     } catch (error) {
       console.error('Error checking if user is in artist table:', error);
