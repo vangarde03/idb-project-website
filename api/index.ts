@@ -107,16 +107,24 @@ app.post("/verify", (req, res) => {
 let redirecting = false;
 
 // Catch-all route for GET requests
-app.get("*", (req, res) => {
-  if (!redirecting) {
-    // Set flag to indicate redirection
-    redirecting = true;
-    // Reload the page by redirecting to the same URL
-    res.redirect(req.originalUrl);
+// Catch-all route for GET requests
+app.get("*", (req, res, next) => {
+  // Check if the request is for the UI
+  if (req.accepts("html")) {
+    if (!redirecting) {
+      // Set flag to indicate redirection
+      redirecting = true;
+      // Reload the page by redirecting to the same URL
+      res.redirect(req.originalUrl);
+    } else {
+      // Reset flag for subsequent requests
+      redirecting = false;
+      // Allow the request to pass through without redirection
+      next();
+    }
   } else {
-    // Reset flag for subsequent requests
-    redirecting = false;
-    // Allow the request to pass through without redirection
+    // If the request is not for the UI, allow it to pass through without redirection
+    next();
   }
 });
 
