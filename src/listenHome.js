@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
+
 const ListenHome = () => {
+
+  const convertDataToArrayOfArrays = (data) => {
+    return data.map(item => Object.values(item));
+  };
+
+
   const location = useLocation();
   const { state } = location;
   const { username } = state;
@@ -27,7 +34,7 @@ const ListenHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setPlaylists(data);
       } catch (error) {
         console.error('Error fetching playlists:', error);
@@ -44,7 +51,8 @@ const ListenHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
+
         setFollowerListeners(data);
       } catch (error) {
         console.error('Error fetching follower listeners:', error);
@@ -61,7 +69,7 @@ const ListenHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         console.log(data);
         setFollowerArtists(data);
       } catch (error) {
@@ -79,7 +87,7 @@ const ListenHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setFollowedListeners(data);
       } catch (error) {
         console.error('Error fetching followed listeners:', error);
@@ -96,7 +104,7 @@ const ListenHome = () => {
           },
           body: JSON.stringify({ query })
         });
-        const data = await response.json();
+        const data = convertDataToArrayOfArrays(await response.json());
         setFollowedArtists(data);
       } catch (error) {
         console.error('Error fetching followed artists:', error);
